@@ -19,10 +19,12 @@ function HomePage() {
             {/* Welcome message displayed only on the homepage */}
             <h1>Welcome to Beacon Safeguard Solutions</h1>
             <p>Your trusted partner in security and risk management solutions.</p>
-            <p>New Applicants Click "Get Started" below:</p>
+            
             <p>Thank you for your interest in joining Beacon Safeguard Solutions as a consultant.</p> 
             <p>Please complete the following questionnaire which will be followed by a request to submit your CV.</p>
-                
+            <p>New Applicants Click "Get Started" below:</p>
+
+            
             {/* Button to start the applicant process */}
             <button onClick={handleGetStarted}>Get Started</button>
 
