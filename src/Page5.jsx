@@ -1,5 +1,4 @@
 import React from "react";
-import Page4 from "./Page4.jsx";
 
 
 function Page5() {

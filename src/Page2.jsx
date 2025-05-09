@@ -1,7 +1,5 @@
-// src/Page2.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 
 function Page2() {
     const navigate = useNavigate();
@@ -9,16 +7,34 @@ function Page2() {
     const [dob, setDob] = useState('');
     const [experience, setExperience] = useState('');
 
+    // Load data from localStorage
+    const surname = localStorage.getItem('surname');
+    const firstName = localStorage.getItem('firstName');
+    const email = localStorage.getItem('email');
+
+    // Use effect to validate if all previous data exists
+    useEffect(() => {
+        if (!surname || !firstName || !email) {
+            alert("Missing data, please go back and fill in the form!");
+            navigate('/'); // Redirect back to home page if data is missing
+        }
+    }, [navigate, surname, firstName, email]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Logic to close application if 'Less than 5' is selected for experience
         if (experience === 'Less than 5') {
             alert('Thank you for your interest. Your application will not be processed.');
-            return;
+            return; // End submission
         }
 
-        navigate('/page3'); // Go to the document upload page
+        // Save the data from this page to localStorage for the next page
+        localStorage.setItem('dob', dob);
+        localStorage.setItem('experience', experience);
+
+        // Redirect to the next page (Page 3)
+        navigate('/page3');
     };
 
     return (

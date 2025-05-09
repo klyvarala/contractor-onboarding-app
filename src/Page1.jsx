@@ -1,8 +1,7 @@
-// src/Page1.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Page3() {
+function Page1() {
     const navigate = useNavigate();
 
     const [surname, setSurname] = useState('');
@@ -19,6 +18,13 @@ function Page3() {
             alert('Thank you for your interest. Your application will not be processed.');
             return; // End submission
         }
+
+        // Save data to localStorage
+        localStorage.setItem('surname', surname);
+        localStorage.setItem('firstName', firstName);
+        localStorage.setItem('email', email);
+        localStorage.setItem('gender', gender);
+        localStorage.setItem('education', education);
 
         // Redirect to the next page (Page 2)
         navigate('/page2');
@@ -68,5 +74,4 @@ function Page3() {
     );
 }
 
-export default Page3;
-
+export default Page1;

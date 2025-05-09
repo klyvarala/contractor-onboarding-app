@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select'; // Import react-select for dropdown
 
@@ -218,6 +218,21 @@ function Page3() {
     const [languages, setLanguages] = useState([]);
     const [additionalInfo, setAdditionalInfo] = useState('');
 
+    // Load data from localStorage
+    const surname = localStorage.getItem('surname');
+    const firstName = localStorage.getItem('firstName');
+    const email = localStorage.getItem('email');
+    const dob = localStorage.getItem('dob');
+    const experience = localStorage.getItem('experience');
+
+    // Use effect to validate if all previous data exists
+    useEffect(() => {
+        if (!surname || !firstName || !email || !dob || !experience) {
+            alert("Missing data, please go back and fill in the form!");
+            navigate('/'); // Redirect back to home page if data is missing
+        }
+    }, [navigate, surname, firstName, email, dob, experience]);
+
     // Handle continent selection
     const handleContinentChange = (selectedOptions) => {
         setSelectedContinents(selectedOptions);
@@ -227,6 +242,7 @@ function Page3() {
     const handleCountryChange = (selectedOptions) => {
         setSelectedCountries(selectedOptions);
     };
+
     // Handle language selection
     const handleLanguageChange = (selectedOptions) => {
         setLanguages(selectedOptions);
@@ -235,11 +251,13 @@ function Page3() {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Selected Continents:', selectedContinents);
-        console.log('Selected Countries:', selectedCountries);
-        console.log('Other Countries:', otherCountries);
-        console.log('Languages:', languages);
-        console.log('Additional Info:', additionalInfo);
+
+        // Save the data from this page to localStorage for the next page
+        localStorage.setItem('continents', JSON.stringify(selectedContinents));
+        localStorage.setItem('countries', JSON.stringify(selectedCountries));
+        localStorage.setItem('otherCountries', otherCountries);
+        localStorage.setItem('languages', JSON.stringify(languages));
+        localStorage.setItem('additionalInfo', additionalInfo);
 
         // Redirect to the next page (Page 4)
         navigate('/page4');
@@ -247,7 +265,7 @@ function Page3() {
 
     return (
         <div>
-            <h2>Experience</h2>
+            <h2>Work Experience and Additional Info</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Continents Worked In:</label>
