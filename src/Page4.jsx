@@ -37,7 +37,7 @@ function Page4() {
 
         try {
             // Send the data to the API Gateway with FormData
-            const response = await fetch('https://your-api-gateway-url/submit', {
+            const response = await fetch('https://avauuo11td.execute-api.eu-west-2.amazonaws.com/prod', {
                 method: 'POST',
                 body: formData,  // Send formData directly
             });
